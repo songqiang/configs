@@ -36,9 +36,18 @@
 		 ("\\.R$" . ess-mode)
 		 ("\\.m$" . matlab-mode)
 		 ("\\.tex" . latex-mode)
+                 ("\\.org" . org-mode)
 		 )
 	   auto-mode-alist)
 )
+
+;;; outline mode
+(setq outline-minor-mode-prefix [(control o)])
+
+;;; org-mode
+(setq org-hide-leading-stars t)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done 'time)
 
 ;;; Emacs shell mode: make PS1 display correctly
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
