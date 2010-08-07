@@ -1,0 +1,14 @@
+# Aliases - SONG QIANG 
+
+alias ls='ls --color=auto -CF'
+alias pg='ps aux | grep'
+alias gvim='gvim -fn 6x10'
+alias bc='bc -ql'
+alias rm='rm -i'
+alias hist='history|grep'
+
+# color grep.
+# Make sure grep accepts the color argument before setting it. 
+( echo dummyline | grep --color=auto dummyline &> /dev/null ) && alias grep="grep --color=auto"
+
+

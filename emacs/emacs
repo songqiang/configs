@@ -1,0 +1,229 @@
+;;; Emacs Configuration File for Aquamacs Emacs
+;;; Song Qiang keeyang@mail.ustc.edu.cn
+
+;;; Personal Lisp Extensions Load Path
+(setq load-path
+      (append (list nil
+		    "~/.emacs-lisp"
+		    "~/.emacs-lisp/icicles")
+		    "/usr/share/emacs/site-lisp"
+	      load-path))
+
+;;;  interactively do things swtich among buffers more easily
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+
+;;; global Key bindings
+(global-set-key [f2] 'goto-line)
+(global-set-key [M-g] 'goto-line)
+(global-set-key [f3] 'query-replace)
+(global-set-key [f4] 'switch-to-buffer)
+(global-set-key [M-r] 'isearch-backward-regexp)
+(global-set-key [M-s] 'isearch-forward-regexp)
+
+;;; global settings
+(setq-default tab-width 4)
+
+;;; define auto-mode list
+(setq auto-mode-alist
+	  (append 
+	   '(("\\.cpp$" . c++-mode)
+		 ("\\.hpp$" . c++-mode)
+		 ("\\.c$" . c-mode)
+		 ("\\.h$". c-mode)
+		 ("\\.py$". python-mode)
+		 ("\\.R$" . ess-mode)
+		 ("\\.m$" . matlab-mode)
+		 ("\\.tex" . latex-mode)
+		 )
+	   auto-mode-alist)
+)
+
+;;; Emacs shell mode: make PS1 display correctly
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;;; auto-pair of {} [] () and quotes
+(require 'autopair)
+(require 'psvn)
+
+;;; lisp mode
+(defun my-emacs-lisp-mode-hook ()
+  (setq tab-width 4)
+  (define-key lisp-mode-map [C-m] 'newline-and-indent)  
+  (autopair-mode)
+)
+
+(add-hook 'emacs-lisp-mode-hook 'my-emacs-lisp-mode-hook)
+
+;;; matlab mode
+(require 'matlab)
+(defun my-emacs-lisp-mode-hook ()
+  (setq tab-width 4)
+  (define-key matlab-mode-map [C-m] 'newline-and-indent)  
+  (autopair-mode)
+)
+
+(add-hook 'emacs-lisp-mode-hook 'my-emacs-lisp-mode-hook)
+
+
+;;; C/C++ mode
+(setq c-default-style 
+      '((java-mode . "java") (other . "bsd")))
+
+(defun my-c++-mode-hook ()
+  (c-toggle-auto-newline 1)
+  (c-toggle-electric-state 1)
+  (c-toggle-hungry-state 1)
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (autopair-mode)
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil)
+)
+
+
+(defun my-c-mode-hook ()
+  (c-toggle-auto-newline 1)
+  (c-toggle-electric-state 1)
+  (c-toggle-hungry-state 1)
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (autopair-mode)
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil)
+)
+
+(add-hook 'c-mode-hook 'my-c-mode-hook) 
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
+
+;; Load CEDET
+(when (file-readable-p "~/.emacs-lisp/cedet-1.0pre4/common/cedet.el")
+    (load-file "~/.emacs-lisp/cedet-1.0pre4/common/cedet.el")
+
+    ;; Enabling various SEMANTIC minor modes.  See semantic/INSTALL for more ideas.
+    ;; Select one of the following:
+
+    ;; * This enables the database and idle reparse engines
+    ;;(semantic-load-enable-minimum-features)
+
+    ;; * This enables some tools useful for coding, such as summary mode
+    ;;   imenu support, and the semantic navigator
+    (semantic-load-enable-code-helpers)
+
+    ;; * This enables even more coding tools such as the nascent intellisense mode
+    ;;   decoration mode, and stickyfunc mode (plus regular code helpers)
+    ;; (semantic-load-enable-guady-code-helpers)
+
+    ;; * This turns on which-func support (Plus all other code helpers)
+    ;; (semantic-load-enable-excessive-code-helpers)
+
+    ;; This turns on modes that aid in grammar writing and semantic tool
+    ;; development.  It does not enable any other features such as code
+    ;; helpers above.
+    ;; (semantic-load-enable-semantic-debugging-helpers)
+)
+
+
+;;; Load ESS Emacs Speak Statistics package
+(require 'ess-site)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Auctex/Latex
+
+
+(defun my-latex-mode-hook ()
+  (message "Loading my-LaTex-mode-hook")
+  (setq fill-coumn 80)
+  (setq auto-fill-mode t)
+  (setq Tex-parse-self t)
+  (setq Tex-auto-save t)
+  (setq-default TeX-master nil)           ;set up AUCTeX to deal with
+                                        ;multiple file documents.
+  (setq Tex-PDF-mode t)
+  (setq TeX-fold-mode t) ;turn on tex-fold-mode
+                                                      ;by default
+
+  (setq reftex-mode t) ; turn on reftex-mode
+
+  (setq LaTeX-math-mode t) ;turn on math-mode by
+                                             ;default
+
+  (setq flyspell-mode t) ;turn on flyspell mode by
+                                           ;default
+  (message "my-latex-mode-hook loaded successfully")
+)
+
+; add customized hook
+(add-hook 'Tex-mode-hook 'my-latex-mode-hook)
+(add-hook 'LaTex-mode-hook 'my-latex-mode-hook)
+(add-hook 'latex-mode-hook 'my-latex-mode-hook)
+(add-hook 'Tex-tex-mode-hook 'my-latex-mode-hook)
+
+
+;; load package
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
+(require 'reftex)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; python mode
+
+;; the following code implements automatical complementation of paired (),
+;; "", [], {}, ''
+
+(defun electric-pair ()
+  "Insert character pair without sourding spaces"
+  (interactive)
+  (let (parens-require-spaces)
+    (insert-pair)))
+
+(defun define-electric-pair-ley ()
+  (define-key py-mode-map "\"" 'electric-pair)
+  (define-key py-mode-map "\'" 'electric-pair)
+  (define-key py-mode-map "(" 'electric-pair)
+  (define-key py-mode-map "[" 'electric-pair)
+  (define-key py-mode-map "{" 'electric-pair)
+)
+
+;; make RET work as newline and auto indent
+(defun return-newline-and-indent () 
+  (define-key py-mode-map "\C-m" 'newline-and-indent)
+)
+
+;; customized python-mode-hook
+(defun my-python-mode-hook ()
+  (message "Loading my-python-mode-hook")
+  (setq tab-width 4)
+  (define-electric-pair-ley)
+  (return-newline-and-indent)
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (message "my-python-mode-hook loaded successfully")
+)
+
+;; add my-python-mode-hook
+(add-hook 'python-mode-hook 'my-python-mode-hook)
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(TeX-output-view-style (quote (("^dvi$" ("^landscape$" "^pstricks$\\|^pst-\\|^psfrag$") "%(o?)dvips -t landscape %d -o && gv %f") ("^dvi$" "^pstricks$\\|^pst-\\|^psfrag$" "%(o?)dvips %d -o && gv %f") ("^dvi$" ("^a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4$" "^landscape$") "%(o?)xdvi %dS -paper a4r -s 0 %d") ("^dvi$" "^a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4$" "%(o?)xdvi %dS -paper a4 %d") ("^dvi$" ("^a5\\(?:comb\\|paper\\)$" "^landscape$") "%(o?)xdvi %dS -paper a5r -s 0 %d") ("^dvi$" "^a5\\(?:comb\\|paper\\)$" "%(o?)xdvi %dS -paper a5 %d") ("^dvi$" "^b5paper$" "%(o?)xdvi %dS -paper b5 %d") ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us %d") ("^dvi$" "^legalpaper$" "%(o?)xdvi %dS -paper legal %d") ("^dvi$" "^executivepaper$" "%(o?)xdvi %dS -paper 7.25x10.5in %d") ("^dvi$" "." "%(o?)xdvi %dS %d") ("^pdf$" "." "evince %o %(outpage)") ("^html?$" "." "netscape %o"))))
+ '(auto-compression-mode t nil (jka-compr))
+ '(case-fold-search t)
+ '(current-language-environment "UTF-8")
+ '(default-input-method "rfc1345")
+ '(global-font-lock-mode t nil (font-lock))
+ '(inhibit-startup-screen t)
+ '(show-paren-mode t nil (paren))
+ '(transient-mark-mode t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )

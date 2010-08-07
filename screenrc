@@ -1,0 +1,21 @@
+# ============================================================
+# File:		$HOME/.screenrc
+# Purpose:	Setup file for GNU Screen
+# Author:	Song Qiang
+# Ref:		www.softpanorama.org/Utilities/Screen/screenrc_examples.shtml
+# ============================================================
+
+
+# Variables - Boolean Values
+startup_message		off		# default: on
+
+# Variables - Number & String
+defscrollback		1000
+shell 			bash
+
+# hard status and tabs for windows
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+
+
