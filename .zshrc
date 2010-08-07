@@ -55,7 +55,7 @@ EDITOR='vim'
     done
     PR_NO_COLOR="%{$terminfo[sgr0]%}"
 PS1="$PR_RED%n$PR_YELLOW@$PR_GREEN%U%m%u$PR_NO_COLOR:$PR_CYAN%~
-$PR_NO_COLOR%(!.#.$) "
+$PR_BLUE%(!.#.$)$PR_NO_COLOR "
 #LANGUAGE=
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
