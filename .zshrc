@@ -1,9 +1,9 @@
-######################################################################
-#           jdong's zshrc file v0.2.1 , based on:
-#		      mako's zshrc file, v0.1
+################################
+# .zshrc - zsh configuration file
+# Song Qiang <qiang.song@usc.edu> 2010
 #
-# 
-######################################################################
+# derived from http://stuff.mit.edu/~jdong/misc/zshrc
+############################### 
 
 # next lets set some enviromental/shell pref stuff up
 # setopt NOHUP
@@ -37,7 +37,7 @@ zmodload -ap zsh/mapfile mapfile
 
 
 PATH="/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:$PATH"
-TZ="America/New_York"
+TZ="America/Los_Angeles"
 HISTFILE=$HOME/.zhistory
 HISTSIZE=1000
 SAVEHIST=1000
@@ -71,42 +71,11 @@ unsetopt ALL_EXPORT
 # # --------------------------------------------------------------------
 # # aliases
 # # --------------------------------------------------------------------
-
-alias slrn="slrn -n"
-alias man='LC_ALL=C LANG=C man'
-alias f=finger
-alias ll='ls -al'
-alias ls='ls --color=auto '
-alias offlineimap-tty='offlineimap -u TTY.TTYUI'
-alias hnb-partecs='hnb $HOME/partecs/partecs-hnb.xml'
-alias rest2html-css='rst2html --embed-stylesheet --stylesheet-path=/usr/share/python-docutils/s5_html/themes/default/print.css'
-#if [[ $HOSTNAME == "kamna" ]] {
-#	alias emacs='emacs -l ~/.emacs.kamna'
-#}	
-
 test -s ~/.alias && source ~/.alias || true
 # alias	=clear
 
-#chpwd() {
-#     [[ -t 1 ]] || return
-#     case $TERM in
-#     sun-cmd) print -Pn "\e]l%~\e\\"
-#     ;;
-#    *xterm*|screen|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
-#    ;;
-#    esac
-#}
-selfupdate(){
-        URL="http://stuff.mit.edu/~jdong/misc/zshrc"
-        echo "Updating zshrc from $URL..."
-        echo "Press Ctrl+C within 5 seconds to abort..."
-        sleep 5
-        cp ~/.zshrc ~/.zshrc.old
-        wget $URL -O ~/.zshrc
-        echo "Done; existing .zshrc saved as .zshrc.old"
-}
-#chpwd
 
+### Key bindings
 autoload -U compinit
 compinit
 bindkey "^?" backward-delete-char
@@ -117,6 +86,12 @@ bindkey '^[[6~' down-line-or-history
 bindkey "^r" history-incremental-search-backward
 bindkey ' ' magic-space    # also do history expansion on space
 bindkey '^I' complete-word # complete on tab, leave expansion to _expand
+bindkey -e  ## emacs key bindings
+#bindkey -v ## vi key bindings
+
+
+
+# Completion Styles
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
@@ -126,8 +101,6 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 zstyle -e ':completion:*:approximate:*' max-errors \
     'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-
-# Completion Styles
 
 # list of completers to use
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
@@ -196,5 +169,10 @@ zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
 zstyle '*' single-ignored show
 
-# .alias
-
+# this file based is derived from 
+######################################################################
+#           jdong's zshrc file v0.2.1 , based on:
+#		      mako's zshrc file, v0.1
+#
+# 
+######################################################################
