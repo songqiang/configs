@@ -45,9 +45,15 @@
 (setq outline-minor-mode-prefix [(control o)])
 
 ;;; org-mode
-(setq org-hide-leading-stars t)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done 'time)
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+
+(defun my-org-mode-hook ()
+	(setq org-hide-leading-stars t)
+	(define-key global-map "\C-ca" 'org-agenda)
+	(setq org-log-done 'time)
+	(turn-on-auto-fill)
+	(flyspell-mode 1)	
+)
 
 ;;; Emacs shell mode: make PS1 display correctly
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
