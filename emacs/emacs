@@ -21,6 +21,7 @@
 (global-set-key [f4] 'switch-to-buffer)
 (global-set-key [M-r] 'isearch-backward-regexp)
 (global-set-key [M-s] 'isearch-forward-regexp)
+(global-set-key [M-/] 'hippie-expand)
 
 ;;; global settings
 (setq-default tab-width 4)
