@@ -1,6 +1,10 @@
 ;;; Emacs Configuration File for Aquamacs Emacs
 ;;; Song Qiang keeyang@mail.ustc.edu.cn
 
+;;; use x-window clipboard so that if you copy some texts in emacs, 
+;;; you can paste in other applications
+(setq x-select-enable-clipboard t)
+
 ;;; Personal Lisp Extensions Load Path
 (setq load-path
       (append (list nil
