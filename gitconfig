@@ -1,0 +1,26 @@
+# GIT Configuration File
+# Song, Qiang <keeyang@ustc.edu> 2014
+
+[user]
+        name = Song, Qiang
+        email = keeyang@ustc.edu
+[core]
+        pager = less -r -F -X
+[alias]
+        co = checkout
+        br = branch
+        m = merge
+        ci = commit
+        s = status --short
+        d = difftool
+        l = log --max-count=8
+        l1 = log --max-count=20 --pretty=oneline --abbrev-commit
+        a = add
+        unstage = reset HEAD --
+        ls = ls-files
+[diff]
+        tool = vimdiff
+[merge]
+        tool = vimdiff
+[difftool]
+        prompt = false
