@@ -94,54 +94,21 @@ fi
 # Aliases 
 test -s ~/.alias && . ~/.alias || true
 
-
-# Functions
-findgrep () {           # find | grep
-        if [ $# -eq 0 ]; then
-                echo "findgrep: No arguments entered."; return 1
+# Add pushd enhanced cd command to quickly switch between directories
+function pushd_cd 
+{
+    if (("$#" > 0)); then
+        if [ "$1" == "-" ]; then
+            popd > /dev/null
+            dirs -v
         else
-                # "{.[a-zA-Z],}*" instead of "." makes the output cleaner
-                find {.[a-zA-Z],}* -type f | xargs grep -n $* /dev/null \
-                                2> /dev/null
+            pushd "$@" > /dev/null
         fi
+    else
+        pushd "$@" > /dev/null
+    fi
 }
 
-swap () {               # swap 2 filenames around
-        if [ $# -ne 2 ]; then
-                echo "swap: 2 arguments needed"; return 1
-        fi
-
-        if [ ! -e $1 ]; then
-                echo "swap: $1 does not exist"; return 1
-        fi
-
-        if [ ! -e $2 ]; then
-                echo "swap: $2 does not exist"; return 1
-        fi
-
-        local TMPFILE=tmp.$$ ; mv $1 $TMPFILE ; mv $2 $1 ; mv $TMPFILE $2
-}
-
-rot13 () {              # For some reason, rot13 pops up everywhere
-        if [ $# -eq 0 ]; then
-                tr '[a-m][n-z][A-M][N-Z]' '[n-z][a-m][N-Z][A-M]'
-        else
-                echo $* | tr '[a-m][n-z][A-M][N-Z]' '[n-z][a-m][N-Z][A-M]'
-        fi
-}
-
-
-#[HISTORY]
-
-#v0.1.1 [2007-09-19]
-#move alias to .alias
-
-#v0.1.0
-#.bashrc - Joshua Uziel - Feel free to use any part of this.
-
-#v0.0.0
-# Sample .bashrc for SuSE Linux
-# Copyright (c) SuSE GmbH Nuernberg
-
-
-test -r /sw/bin/init.sh && . /sw/bin/init.sh
+alias c=pushd_cd
+complete -d c
+alias D="dirs -v"
