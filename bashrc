@@ -1,20 +1,20 @@
-# .bashrc 
-# Copyright (C) 2007 SONG QIANG 
-# Ideas and code here come from a variety of other sources. Thanks. 
+# .bashrc
+# Copyright (C) 2007 SONG QIANG
+# Ideas and code here come from a variety of other sources. Thanks.
 #
-# This program is free software; you can redistribute it and/or 
-# modify it under the terms of the GNU General Public License 
-# as published by the Free Software Foundation; either version 2 
-# of the License, or (at your option) any later version. 
-# 
-# This program is distributed in the hope that it will be useful, 
-# but WITHOUT ANY WARRANTY; without even the implied warranty of 
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
-# GNU General Public License for more details. 
-# 
-# You should have received a copy of the GNU General Public License 
-# along with this program; if not, write to the Free Software 
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA. 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 
 # There are 3 different types of shells in bash: the login shell, normal shell
@@ -50,7 +50,6 @@ export VISUAL=$EDITOR
 export PAGER=less
 export LESS='-iMn'
 export PRINTER=lp
-export CVS_RSH=ssh
 export HISTCONTROL=ignoredups # don't put duplicate lines in history
 
 #Define Color
@@ -84,18 +83,15 @@ bind 'set bell-style visible'                   # No beeping
 bind 'set show-all-if-ambiguous on'             # Tab once for complete
 bind 'set visible-stats on'                     # Show file info in complete
 
-# Prompt 
+# Prompt
 if [[ `whoami` = 'root' ]]; then
-	export PS1="\[\033[00m\033[01;31m\]\h \[\033[01;34m\]$PROMPT_DIRSTRING \\\$ \[\033[00m\]"  
-else  
-	export PS1="\[${NC}${LIGHTRED}\]\u\[${YELLOW}\]@\[${LIGHTGREEN}\]\h:\[${LIGHTCYAN}\]\w\n\$ \[${NC}\]"  
-fi 
-
-# Aliases 
-test -s ~/.alias && . ~/.alias || true
+	export PS1="\[\033[00m\033[01;31m\]\h \[\033[01;34m\]$PROMPT_DIRSTRING \\\$ \[\033[00m\]"
+else
+	export PS1="\[${NC}${LIGHTRED}\]\u\[${YELLOW}\]@\[${LIGHTGREEN}\]\h:\[${LIGHTCYAN}\]\w\n\$ \[${NC}\]"
+fi
 
 # Add pushd enhanced cd command to quickly switch between directories
-function pushd_cd 
+function pushd_cd
 {
     if (("$#" > 0)); then
         if [ "$1" == "-" ]; then
@@ -108,7 +104,8 @@ function pushd_cd
         pushd "$@" > /dev/null
     fi
 }
+complete -d pushd_cd
 
-alias c=pushd_cd
-complete -d c
-alias D="dirs -v"
+# Aliases 
+[[  -s ~/.alias ]] && source ~/.alias || true
+
