@@ -1,46 +1,33 @@
-# Aliases - SONG QIANG 
-
-alias ls='ls --color=auto -CF'
-alias pg='ps aux | grep'
-alias gvim='gvim -fn 6x10'
-alias bc='bc -ql'
-alias rm='rm -i'
-alias hist='history|grep'
-
-# color grep.
-# Make sure grep accepts the color argument before setting it. 
-( echo dummyline | grep --color=auto dummyline &> /dev/null ) && alias grep="grep --color=auto"
-
-alias slrn="slrn -n"
-alias man='LC_ALL=C LANG=C man'
-alias f=finger
-alias ll='ls -al'
-alias ls='ls --color=auto '
-alias offlineimap-tty='offlineimap -u TTY.TTYUI'
-alias hnb-partecs='hnb $HOME/partecs/partecs-hnb.xml'
-
 alias a=awk
-alias c=pushd_cd
+alias bc='bc -ql'
 alias C=cat
-alias d="vimdiff -R"
-alias D="dirs -v"
-alias e=grep
+alias c=pushd_cd
+alias c-='pushd_cd -'
+alias d="dirs -v"
+alias D="vimdiff -R"
 alias E=emacs
+alias e=echo
 alias f=find
 alias g=git
-alias G=grep
 alias h=head
+alias hist='history|grep'
+alias j='jobs -l'
 alias k=kill
 alias l=ls
+alias less='less -S'
+alias ll='ls -lh'
 alias m=man
-alias p=ps
+alias md='mkdir -p'
+alias p='ps -a'
 alias P=python
-alias q=grep
-alias r=grep
-alias s=sort
+alias q=exit
+alias r='egrep --text  --ignore-case --color=auto'
+alias rm='rm -i'
 alias S=sed
+alias s=sort
 alias t=tail
 alias T=top
 alias u=uniq
 alias v="vi -R"
 alias x=source
+
