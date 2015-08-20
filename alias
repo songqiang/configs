@@ -2,6 +2,7 @@ alias a=awk
 alias bc='bc -ql'
 alias C=cat
 alias c=pushd_cd
+complete -d c
 alias c-='pushd_cd -'
 alias d="dirs -v"
 alias D="vimdiff -R"
