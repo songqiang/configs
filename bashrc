@@ -91,7 +91,7 @@ else
 fi
 
 # Add pushd enhanced cd command to quickly switch between directories
-function pushd_cd
+pushd_cd()
 {
     if (("$#" > 0)); then
         if [ "$1" == "-" ]; then
@@ -106,6 +106,16 @@ function pushd_cd
 }
 complete -d pushd_cd
 
-# Aliases 
+dirs_or_popd()
+{
+    if (("$#" == 0)); then
+       dirs -v
+    else
+        popd -n +"$1" > /dev/null
+        dirs -v
+    fi
+}
+
+# Aliases
 [[  -s ~/.alias ]] && source ~/.alias || true
 

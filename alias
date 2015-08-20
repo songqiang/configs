@@ -4,8 +4,8 @@ alias C=cat
 alias c=pushd_cd
 complete -d c
 alias c-='pushd_cd -'
-alias d="dirs -v"
-alias D="vimdiff -R"
+alias d='dirs_or_popd'
+alias D='vimdiff -R'
 alias E=emacs
 alias e=echo
 alias f=find
