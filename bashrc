@@ -94,14 +94,25 @@ fi
 pushd_cd()
 {
     if (("$#" > 0)); then
-        if [ "$1" == "-" ]; then
+        if [[ "$1" == "-" ]]; then
             popd > /dev/null
             dirs -v
+        elif [[ -d "$1" ]]; then
+            local idx=
+            local dir=
+            read idx dir <<< $(dirs -v -l | egrep "^ *[0-9]+ +${1}$")
+            if [[ -z "$idx" ]]; then
+                pushd "$1" > /dev/null
+            else
+                pushd +"$idx" > /dev/null
+            fi
+        elif [[ "${1:0:1}" == "+" || "${1:0:1}" == "-" ]]; then
+            pushd "$1" > /dev/null
         else
-            pushd "$@" > /dev/null
+            pushd +"$1" > /dev/null
         fi
     else
-        pushd "$@" > /dev/null
+        pushd > /dev/null
     fi
 }
 complete -d pushd_cd
