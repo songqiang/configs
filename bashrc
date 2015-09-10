@@ -100,7 +100,8 @@ pushd_cd()
         elif [[ -d "$1" ]]; then
             local idx=
             local dir=
-            read idx dir <<< $(dirs -v -l | egrep "^ *[0-9]+ +${1}$")
+            target_dir=$(pushd $1|cut -f1 -d" ")
+            read idx dir <<< $(dirs -v | egrep "^ *[0-9]+ +${target_dir}$")
             if [[ -z "$idx" ]]; then
                 pushd "$1" > /dev/null
             else
