@@ -42,6 +42,8 @@
 # the default $PATH is set up in /etc/profile
 # if you want to add other directories, uncomment the line below
 # export PATH="$PATH:other-directories"
+export PATH="/Users/songqiang/anaconda3/bin:$PATH"
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH" # add path for macports
 
 # Set our environment variables
 export MAILCHECK=0
@@ -130,4 +132,3 @@ dirs_or_popd()
 
 # Aliases
 [[  -s ~/.alias ]] && source ~/.alias || true
-
