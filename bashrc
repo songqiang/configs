@@ -53,6 +53,7 @@ export PAGER=less
 export LESS='-iMn'
 export PRINTER=lp
 export HISTCONTROL=ignoredups # don't put duplicate lines in history
+export PYTHONSTARTUP="$HOME/.pythonrc"
 
 #Define Color
 BLACK='\e[0;30m'

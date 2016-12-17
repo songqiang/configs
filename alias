@@ -17,11 +17,12 @@ alias k=kill
 alias l=ls
 alias less='less -S'
 alias ll='ls -lh'
+alias lt='ls -lhrt'
 alias m=man
 alias md='mkdir -p'
 alias p='ps -a'
 alias pk=pkill
-alias P='python3 -c "from math import *;  import code; code.interact(local=locals())"'
+alias P=python3
 alias q=exit
 alias r='egrep --text  --ignore-case --color=auto'
 alias rm='rm -i'
