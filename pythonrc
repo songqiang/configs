@@ -19,3 +19,7 @@ atexit.register(readline.write_history_file, history_file)
 del readline, rlcompleter, atexit, history_file
 
 from math import *
+from statistics import *
+from pprint import pprint
+from itertools import *
+
