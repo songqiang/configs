@@ -1,2 +1,3 @@
 --file  /Users/songqiang/Documents/White-Board/ledger.dat
 --sort date
+--date-format=%Y-%m-%d
