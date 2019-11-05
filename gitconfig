@@ -24,5 +24,6 @@
 [merge]
         tool = vimdiff
         conflictstyle = diff3
+        ff = only
 [difftool]
         prompt = false
