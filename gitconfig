@@ -10,6 +10,7 @@
         co = checkout
         br = branch
         m = merge
+        r = rebase
         ci = commit
         s = status --short
         d = difftool
@@ -22,5 +23,6 @@
         tool = vimdiff
 [merge]
         tool = vimdiff
+        conflictstyle = diff3
 [difftool]
         prompt = false
